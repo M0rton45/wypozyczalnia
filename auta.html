@@ -1,18 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auta Siewierz</title>
     <link rel="stylesheet" href="styl.css">
 </head>
-
 <body>
-
-    <div class="baner">
-        <h2>Najlepsze auta w mieście<img src="./logo.png" height="100px" alt=""></h2>
-    </div>
+    
+    <div class="baner"><h2>Najlepsze auta w mieście<img src="./logo.png" height="100px" alt=""></h2></div>
     <div class="lewy">
         <p>U nas zamówisz auto z dowozem</p>
         <a href="./logo.png">Nasze logo</a>
@@ -23,61 +19,54 @@
     </div>
     <div class="prawy">
         <h3>Oferta</br>
-            <div class="content">
-                <input type="radio" name="auto" id="BMW" value="BMW">BMW</br>
-                <input type="radio" name="auto" id="AUDI" value="AUDI">AUDI</br>
-                <input type="radio" name="auto" id="MALUCH" value="MALUCH">MALUCH</br>
-            </div>
+        <input type="radio" name="auto" id="BMW" value="BMW">BMW</br>
+        <input type="radio" name="auto" id="AUDI" value="AUDI">AUDI</br>
+        <input type="radio" name="auto" id="MALUCH" value="MALUCH">MALUCH</br>
         </h3>
-
         <a href="Oferta.txt" class="a1">Pobierz pełną ofertę</a>
-        <h3>Liczba dni:
-            <input type="number" id="dni">
-        </h3>
+        <h3>Liczba dni: 
+        <input type="number" id="dni"></h3>
     </div>
     <div class="dolny_panel">
         <h3>Oblicz koszt dostawy auta i wypożyczenia
-            <input type="checkbox" id="Siewierz" name="Siewierz">Jestem z Siewierza
-            <p>albo</p>
-            Podaj liczbę kilometrów od Siewierza:
-            <input type="number" name="km" id="km"><br>
-        </h3>
+        <input type="checkbox" id="Siewierz" name="Siewierz" onclick="check()">Jestem z Siewierza
+        <p>albo</p>
+        Podaj liczbę kilometrów od Siewierza:
+        <input type="number" name="km" id="km" ><br></h3>
         <input type="submit" value="Oblicz" id="licz" onclick="oblicz()">
-        <p>
-        <div id="wynik"></div>
-        </p>
+        <p><div id="wynik"></div></p>
     </div>
     <div class="stopka">Stronę internetową opracował: <b>NUMER PESEL</b></div>
 
     <script>
-        document.getElementById('Siewierz').onchange = function () {
-            document.getElementById('km').disabled = this.checked;
-        };
-        function oblicz() {
-            const tab = [200, 100, 50];
+function check(){
+    var zamieszkanie = document.getElementById('Siewierz');
+    if (zamieszkanie.checked) var kilometry = document.getElementById('km').disabled=true;
+    else var kilometry = document.getElementById('km').readOnly=true;
+function oblicz(){
 
-            var wybrane = document.getElementsByName('auto');
-            var kilometry = document.getElementById('km');
-            var dni = document.getElementById("dni");
-            console.log(dni.value);
-            cenakm = kilometry.value * 2;
-            console.log(cenakm);
-            for (i = 0; i < wybrane.length; i++) {
-                var zamieszkanie = document.getElementById('Siewierz');
-                if (wybrane[i].checked && zamieszkanie.checked) document.getElementById("wynik").innerHTML = "Wybrane auto to " + wybrane[i].value + " i dostawa gratis, cena wypożyczenia to: " + (tab[i] * dni.value) + " razem: " + tab[i];
-                else if (wybrane[i].checked) document.getElementById("wynik").innerHTML = "Wybrane auto to " + wybrane[i].value + " cena za dostawe to: " + cenakm + " za wypożyczenie na " + dni.value + " to: " + (tab[i] * dni.value) + " razem: " + (tab[i] + cenakm);
+const tab = [200,150,50];
 
-
-            }
-
-
-
+    var wybrane = document.getElementsByName('auto');
+    var kilometry = document.getElementById('km');
+    var dni = document.getElementById("dni");
+    console.log(dni.value);
+    cenakm=kilometry.value*2;
+    console.log(cenakm);
+    
+        for ( i=0; i<wybrane.length; i++){
+            
+            if (wybrane[i].checked && zamieszkanie.checked) document.getElementById("wynik").innerHTML="Wybrane auto to "+wybrane[i].value+" i dostawa gratis, cena wypożyczenia to: "+(tab[i]*dni.value)+"zł razem: "+(tab[i]*dni.value)+"zł";
+            else if (wybrane[i].checked) document.getElementById("wynik").innerHTML="Wybrane auto to "+wybrane[i].value+" cena za dostawe to: "+cenakm+"zł za wypożyczenie na "+dni.value+" dni to: "+(tab[i]*dni.value)+"zł razem: "+(tab[i]*dni.value+cenakm)+"zł";
         }
 
+
+
+    }
+}
 
 
     </script>
 
 </body>
-
 </html>
